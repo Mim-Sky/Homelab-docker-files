@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  timemachine:
+    image: mbentley/timemachine:smb
+    container_name: timemachine
+    restart: always
+    network_mode: host
+    environment:
+      - TM_USERNAME=${TM_USERNAME}
+      - TM_GROUPNAME=${TM_GROUPNAME}
+      - PASSWORD=${TM_PASSWORD}
+      - TM_UID=${TM_UID}
+      - TM_GID=${TM_GID}
+      - SET_PERMISSIONS=${SET_PERMISSIONS}
+      - VOLUME_SIZE_LIMIT=${VOLUME_SIZE_LIMIT}
+    env_file:
+      - .env
+    volumes:
+      - ${TM_VOLUME_PATH}:/opt/timemachine
+    tmpfs:
+      - /run/samba
+networks: {}
